@@ -17,7 +17,7 @@ args = parser.parse_args()
 command = 'ffmpeg -ss %s -i %s -vf "select=gt(scene\,0.4)" -r 1 -frames:v 1 %s'
 input_file = args.src
 output_file = 'thumb_%s.tif'
-num_thumbs = 20
+num_thumbs = 10
 num_out = 3
 thumbs = {}
 score_points = {
@@ -176,7 +176,11 @@ def output():
 
     for i in range(0, num_out):
         thumb = best[i][0]
-        name = input_file + '_thumb_' + str(i) + '.jpg'
+        name = input_file + '_' + str(i) + '_' + os.path.basename(thumb) + '.jpg'
+
+        if os.path.isfile(thumb) is False:
+            continue
+
         im = Image.open(thumb)
         im.save(os.path.join(output_folder, name), 'JPEG')
 
@@ -184,7 +188,7 @@ def output():
 def fire():
     prepare_folder(work_folder)
     generate_thumbs(num_thumbs, output_file)
-    analyze()
+    # analyze()
     output()
 
 fire()

@@ -72,7 +72,7 @@ def brightness(stat):
    r,g,b = stat.mean
    brightness = math.sqrt(0.241 * (r ** 2) + 0.691 * (g ** 2) + 0.068 * (b ** 2))
    print 'perc brightness %s' % brightness
-   return 1 - math.fabs(brightness / 140 - 1)
+   return 1 - math.fabs(brightness / 100 - 1)
 
 def saturation_dominant_colors(image):
     copy = image
@@ -85,7 +85,7 @@ def saturation_dominant_colors(image):
         hls_color = colorsys.rgb_to_hls(color[0], color[1], color[2])
         luminance = hls_color[1] * 100
         saturation = hls_color[2] * 100
-        saturation_indicator += luminance + saturation
+        saturation_indicator += (luminance + saturation)
 
     print saturation_indicator
     return saturation_indicator / 600

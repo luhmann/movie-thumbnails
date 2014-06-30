@@ -21,9 +21,9 @@ num_thumbs = 10
 num_out = 3
 thumbs = {}
 score_points = {
-    'face': 100,
-    'sat' : 100,
-    'sharpness': 150,
+    'face': 120,
+    'sat' : 50,
+    'sharpness': 100,
     'bri': 50,
     'con': 100
 }
@@ -70,7 +70,9 @@ def generate_thumbs(num, output_file):
 # Returns overall perceived brightness of the image, as defined in luma
 def brightness(stat):
    r,g,b = stat.mean
-   return math.sqrt(0.241 * (r ** 2) + 0.691 * (g ** 2) + 0.068 * (b ** 2)) / 255
+   brightness = math.sqrt(0.241 * (r ** 2) + 0.691 * (g ** 2) + 0.068 * (b ** 2))
+   print 'perc brightness %s' % brightness
+   return 1 - math.fabs(brightness / 140 - 1)
 
 def saturation_dominant_colors(image):
     copy = image
@@ -188,7 +190,7 @@ def output():
 def fire():
     prepare_folder(work_folder)
     generate_thumbs(num_thumbs, output_file)
-    # analyze()
+    analyze()
     output()
 
 fire()

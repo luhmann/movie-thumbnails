@@ -16,7 +16,7 @@ The search for the most meaningful, crisp and clear thumbnail for a video using 
 
 This script extracts a configurable amount of thumbnails from a movie source
 with a high regard for scene-changes and then rates these on a number of
-properties which can then bei weighted to calculate an overall score by which
+properties which can then be weighted to calculate an overall score by which
 the thumbnails are sorted for relevance.
 
 These propertes are:
